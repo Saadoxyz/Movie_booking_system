@@ -1,0 +1,192 @@
+﻿@page "/movies/edit"
+@using Microsoft.EntityFrameworkCore
+@using hey.Models
+@inject IDbContextFactory<hey.Data.heyContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit Booking</PageTitle>
+
+<style>
+    .gold-heading {
+        color: #bfa335;
+        font-weight: 900;
+    }
+
+    .gold-border {
+        border: 2px solid #d4af37;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+    }
+
+    .gold-label {
+        color: #6a5300;
+        font-weight: 600;
+    }
+
+    .gold-input {
+        border: 1px solid #d4af37;
+        padding: 0.75rem;
+        border-radius: 8px;
+        width: 100%;
+        outline: none;
+        font-size: 0.9rem;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .gold-input:focus {
+            border-color: #bfa335;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+        }
+
+    .gold-button {
+        background-color: #bfa335;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+    }
+
+        .gold-button:hover {
+            background-color: #a4882f;
+        }
+
+    .cancel-link {
+        color: #7c6a00;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+
+        .cancel-link:hover {
+            color: #bfa335;
+        }
+
+    .gold-summary {
+        background-color: #fff8dc;
+        border-left: 4px solid #d4af37;
+        color: #8b6f00;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .gold-validation {
+        color: #a35f00;
+        font-size: 0.85rem;
+    }
+
+    .gold-spinner {
+        border: 4px solid rgba(212, 175, 55, 0.3);
+        border-top: 4px solid #d4af37;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        animation: spin 1s linear infinite;
+    }
+    }
+</style>
+
+<div class="max-w-3xl mx-auto px-4 py-10">
+    <h1 class="text-4xl gold-heading mb-8 flex items-center gap-2">
+        ✏️ Edit Event Ticket Booking System
+    </h1>
+
+    @if (Movie is null)
+    {
+        <div class="flex justify-center items-center h-64">
+            <div class="gold-spinner"></div>
+        </div>
+    }
+    else
+    {
+        <div class="bg-white gold-border p-8">
+            <EditForm Model="Movie" OnValidSubmit="UpdateMovie">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="gold-summary" />
+
+                <input type="hidden" name="Movie.Id" value="@Movie.Id" />
+
+                <div class="space-y-6">
+                    <div>
+                        <label for="name" class="gold-label">🎞️ Movie Name</label>
+                        <InputText id="name" @bind-Value="Movie.Name" class="gold-input mt-2" />
+                        <ValidationMessage For="() => Movie.Name" class="gold-validation mt-1" />
+                    </div>
+
+                    <div>
+                        <label for="email" class="gold-label">📧 Email Address</label>
+                        <InputText id="email" @bind-Value="Movie.Email" class="gold-input mt-2" />
+                        <ValidationMessage For="() => Movie.Email" class="gold-validation mt-1" />
+                    </div>
+
+                    <div>
+                        <label for="numberofseats" class="gold-label">👥 Number of Seats</label>
+                        <InputNumber id="numberofseats" @bind-Value="Movie.NumberOfSeats" class="gold-input mt-2" />
+                        <ValidationMessage For="() => Movie.NumberOfSeats" class="gold-validation mt-1" />
+                    </div>
+
+                    <div>
+                        <label for="bookingdate" class="gold-label">📅 Booking Date</label>
+                        <InputDate id="bookingdate" @bind-Value="Movie.BookingDate" class="gold-input mt-2" />
+                        <ValidationMessage For="() => Movie.BookingDate" class="gold-validation mt-1" />
+                    </div>
+
+                    <div class="flex justify-between pt-6">
+                        <a href="/movies" class="cancel-link">← Cancel</a>
+                        <button type="submit" class="gold-button">💾 Save Changes</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    }
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Movie? Movie { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        Movie ??= await context.Movie.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (Movie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task UpdateMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Movie!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!MovieExists(Movie!.Id))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        NavigationManager.NavigateTo("/movies/details?id=" + Movie!.Id);
+    }
+
+    private bool MovieExists(Guid id)
+    {
+        using var context = DbFactory.CreateDbContext();
+        return context.Movie.Any(e => e.Id == id);
+    }
+}

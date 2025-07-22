@@ -1,0 +1,217 @@
+﻿@page "/movies/delete"
+@using Microsoft.EntityFrameworkCore
+@using hey.Models
+@inject IDbContextFactory<hey.Data.heyContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete Booking</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h1>🗑️ Delete Booking</h1>
+        <a href="/movies">← Back to List</a>
+    </div>
+
+    @if (movie is null)
+    {
+        <div class="message">Loading booking details...</div>
+    }
+    else
+    {
+        <div class="card danger">
+            <div class="card-header">
+                <h2>⚠️ Confirm Deletion</h2>
+                <p>This action is irreversible. Are you sure you want to delete this booking?</p>
+            </div>
+
+            <div class="card-body">
+                <div class="field">
+                    <label>🎞️ Movie Name</label>
+                    <div class="value">@movie.Name</div>
+                </div>
+                <div class="field">
+                    <label>📧 Email Address</label>
+                    <div class="value">@movie.Email</div>
+                </div>
+                <div class="field">
+                    <label>👥 Number of Seats</label>
+                    <div class="value">@movie.NumberOfSeats</div>
+                </div>
+                <div class="field">
+                    <label>📅 Booking Date</label>
+                    <div class="value">@movie.BookingDate.ToShortDateString()</div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="/movies" class="btn cancel">Cancel</a>
+                <EditForm Model="movie" OnValidSubmit="DeleteMovie">
+                    <button type="submit" class="btn delete" disabled="@(movie is null)">Delete Booking</button>
+                </EditForm>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #fffaf0;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        color: #3b2f00;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+        .header h1 {
+            font-size: 26px;
+            font-weight: bold;
+            color: #bfa04b;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+            .header a:hover {
+                color: #a77b00;
+            }
+
+    .message {
+        font-size: 18px;
+        color: #666;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 2px solid #f3e5ab;
+        border-radius: 16px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+        .card.danger {
+            border-color: #e53e3e;
+        }
+
+    .card-header {
+        background-color: #ffeaea;
+        padding: 20px;
+        border-bottom: 1px solid #e53e3e;
+    }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #9b2c2c;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            color: #aa3a3a;
+        }
+
+    .card-body {
+        padding: 24px;
+    }
+
+    .field {
+        margin-bottom: 20px;
+    }
+
+        .field label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #6a5d00;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+    .value {
+        font-size: 16px;
+        color: #3f3300;
+        font-weight: 500;
+    }
+
+    .card-footer {
+        background-color: #fdf6dc;
+        padding: 16px 24px;
+        text-align: right;
+        border-top: 1px solid #f3e5ab;
+    }
+
+    .btn {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-left: 8px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn.cancel {
+            background-color: #fefefe;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+            .btn.cancel:hover {
+                background-color: #f0f0f0;
+            }
+
+        .btn.delete {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+            .btn.delete:hover {
+                background-color: #c53030;
+            }
+
+    button:disabled {
+        background-color: #ccc !important;
+        cursor: not-allowed;
+    }
+</style>
+
+@code {
+    private Movie? movie;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        movie = await context.Movie.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (movie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Movie.Remove(movie!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/movies");
+    }
+}

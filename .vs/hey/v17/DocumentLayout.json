@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\code\\Visual programming\\School Portal registration\\hey\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\components\\pages\\moviepages\\edit.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:components\\pages\\moviepages\\edit.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\components\\pages\\moviepages\\details.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:components\\pages\\moviepages\\details.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\components\\pages\\moviepages\\delete.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:components\\pages\\moviepages\\delete.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\components\\pages\\moviepages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:components\\pages\\moviepages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|c:\\code\\visual programming\\school portal registration\\hey\\components\\pages\\moviepages\\create.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F0DCB881-AC85-4BF4-900C-33B8E801A2C7}|hey.csproj|solutionrelative:components\\pages\\moviepages\\create.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\wwwroot\\app.css",
+              "RelativeDocumentMoniker": "wwwroot\\app.css",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\wwwroot\\app.css",
+              "RelativeToolTip": "wwwroot\\app.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-23T14:33:47.432Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.razor",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Index.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\MoviePages\\Index.razor",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Index.razor",
+              "RelativeToolTip": "Components\\Pages\\MoviePages\\Index.razor",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAswJoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T14:26:23.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Edit.razor",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Edit.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\MoviePages\\Edit.razor",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Edit.razor",
+              "RelativeToolTip": "Components\\Pages\\MoviePages\\Edit.razor",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAswFUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T14:25:10.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Details.razor",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Details.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\MoviePages\\Details.razor",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Details.razor",
+              "RelativeToolTip": "Components\\Pages\\MoviePages\\Details.razor",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAswLQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T14:23:14.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Delete.razor",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Delete.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\MoviePages\\Delete.razor",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Delete.razor",
+              "RelativeToolTip": "Components\\Pages\\MoviePages\\Delete.razor",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAswNkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T14:20:08.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Create.razor",
+              "DocumentMoniker": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Create.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\MoviePages\\Create.razor",
+              "ToolTip": "C:\\code\\Visual programming\\School Portal registration\\hey\\Components\\Pages\\MoviePages\\Create.razor",
+              "RelativeToolTip": "Components\\Pages\\MoviePages\\Create.razor",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAwJMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T14:17:37.218Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

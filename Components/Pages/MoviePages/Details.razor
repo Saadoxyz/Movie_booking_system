@@ -1,0 +1,180 @@
+﻿@page "/movies/details"
+@using Microsoft.EntityFrameworkCore
+@using hey.Models
+@inject IDbContextFactory<hey.Data.heyContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Booking Details</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h1>🎬 Event Ticket Booking System</h1>
+        <a href="/movies">← Back to List</a>
+    </div>
+
+    @if (movie is null)
+    {
+        <div class="loading-message">Loading booking details...</div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-title">
+                <h2>📋 Booking Information</h2>
+                <p>Below are the details for this booking.</p>
+            </div>
+
+            <div class="card-body">
+                <div class="field">
+                    <label>🎞️ Movie Name</label>
+                    <div class="value">@movie.Name</div>
+                </div>
+                <div class="field">
+                    <label>📧 Email Address</label>
+                    <div class="value">@movie.Email</div>
+                </div>
+                <div class="field">
+                    <label>👥 Number of Seats</label>
+                    <div class="value">@movie.NumberOfSeats</div>
+                </div>
+                <div class="field">
+                    <label>📅 Booking Date</label>
+                    <div class="value">@movie.BookingDate.ToShortDateString()</div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="@($"/movies/edit/{movie.Id}")" class="edit-button">✏️ Edit Booking</a>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        background-color: #fffaf0;
+        font-family: 'Segoe UI', sans-serif;
+        color: #3b2f00;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+        .header h1 {
+            font-size: 28px;
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+            .header a:hover {
+                color: #a77b00;
+            }
+
+    .loading-message {
+        font-size: 18px;
+        color: #555;
+        text-align: center;
+        padding: 50px 0;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 2px solid #f3e5ab;
+        border-radius: 16px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        background-color: #fff8dc;
+        padding: 18px 24px;
+        border-bottom: 1px solid #f3e5ab;
+    }
+
+        .card-title h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #8b7500;
+        }
+
+        .card-title p {
+            font-size: 14px;
+            color: #7d6b00;
+        }
+
+    .card-body {
+        padding: 24px;
+    }
+
+    .field {
+        margin-bottom: 20px;
+    }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #6a5d00;
+            margin-bottom: 4px;
+        }
+
+    .value {
+        font-size: 16px;
+        font-weight: 500;
+        color: #3f3300;
+    }
+
+    .card-footer {
+        background-color: #fdf6dc;
+        padding: 16px 24px;
+        text-align: right;
+        border-top: 1px solid #f3e5ab;
+    }
+
+    .edit-button {
+        background-color: #ffd700;
+        color: #4b3f00;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+        .edit-button:hover {
+            background-color: #e6c200;
+        }
+</style>
+
+@code {
+    private Movie? movie;
+
+    [SupplyParameterFromQuery]
+    private Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        movie = await context.Movie.FirstOrDefaultAsync(m => m.Id == Id);
+
+        if (movie is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

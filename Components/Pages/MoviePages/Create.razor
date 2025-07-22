@@ -1,0 +1,203 @@
+﻿@page "/movies/create"
+@using Microsoft.EntityFrameworkCore
+@using hey.Models
+@inject IDbContextFactory<hey.Data.heyContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9f5e9;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: #fffaf0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 32px;
+        border: 2px solid #e0c97f;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #b8860b;
+    }
+
+    .header a {
+        text-decoration: none;
+        color: #daa520;
+        font-weight: 600;
+    }
+
+    .header a:hover {
+        color: #b8860b;
+    }
+
+    .section-title {
+        background-color: #fff3cd;
+        padding: 16px;
+        border-bottom: 1px solid #e0c97f;
+    }
+
+    .section-title h2 {
+        font-size: 20px;
+        color: #8b7500;
+        margin: 0;
+    }
+
+    .section-title p {
+        font-size: 14px;
+        color: #7a6a00;
+        margin-top: 6px;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #4a3c00;
+        margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #e5cf91;
+        border-radius: 8px;
+        font-size: 14px;
+        background-color: #fffef8;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #d4af37;
+        box-shadow: 0 0 4px #d4af37;
+    }
+
+    .validation-message {
+        font-size: 13px;
+        color: #c0392b;
+        margin-top: 4px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .form-actions a {
+        color: #777;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .form-actions a:hover {
+        color: #000;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #ffd700;
+        border: none;
+        border-radius: 8px;
+        color: #4b3f00;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #e6c200;
+    }
+
+    .validation-summary {
+        background-color: #fff4e5;
+        border-left: 4px solid #d4af37;
+        color: #b75d00;
+        padding: 10px 16px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <h1>Event Ticket Booking System</h1>
+        <a href="/">← Back to List</a>
+    </div>
+
+    <div class="section-title">
+        <h2>Booking Information</h2>
+        <p>Fill in the details to create a new movie booking</p>
+    </div>
+
+    <EditForm method="post" Model="Movie" OnValidSubmit="AddMovie" FormName="create" Enhance>
+        <DataAnnotationsValidator />
+        <ValidationSummary class="validation-summary" role="alert" />
+
+        <div>
+            <label for="name">Movie Name *</label>
+            <InputText id="name" @bind-Value="Movie.Name" />
+            <ValidationMessage For="() => Movie.Name" class="validation-message" />
+        </div>
+
+        <div style="margin-top: 16px;">
+            <label for="email">Email Address *</label>
+            <InputText id="email" @bind-Value="Movie.Email" />
+            <ValidationMessage For="() => Movie.Email" class="validation-message" />
+        </div>
+
+        <div style="margin-top: 16px;">
+            <label for="numberofseats">Number of Seats *</label>
+            <InputNumber id="numberofseats" @bind-Value="Movie.NumberOfSeats" />
+            <ValidationMessage For="() => Movie.NumberOfSeats" class="validation-message" />
+        </div>
+
+        <div style="margin-top: 16px;">
+            <label for="bookingdate">Booking Date *</label>
+            <InputDate id="bookingdate" @bind-Value="Movie.BookingDate" />
+            <ValidationMessage For="() => Movie.BookingDate" class="validation-message" />
+        </div>
+
+        <div class="form-actions">
+            <a href="/movies">Cancel</a>
+            <button type="submit">Create Booking</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Movie Movie { get; set; } = new();
+
+    private async Task AddMovie()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Movie.Add(Movie);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/");
+    }
+}
