@@ -65,7 +65,7 @@
    git clone https://github.com/YourUsername/EventTicketBookingSystem.git
    cd EventTicketBookingSystem
 ````
-
+````
 2. **Open the project** in Visual Studio or Visual Studio Code.
 
 3. **Configure the database connection** in `appsettings.json` (SQLite, SQL Server, etc.).
